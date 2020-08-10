@@ -1,0 +1,26 @@
+:host{
+    // position: relative;
+    background-color: #e2e7ea;
+    border: 1px solid gray;
+    margin: 20px;
+    padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+
+    h1{
+        white-space: nowrap; 
+        max-width: 100%; 
+        overflow: hidden;
+        text-overflow: ellipsis; 
+    }
+
+    .btn{
+        &.btn-danger{
+            margin-top: 25px;
+        }
+    }
+}

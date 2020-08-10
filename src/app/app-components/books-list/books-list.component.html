@@ -1,0 +1,59 @@
+<div class="sync" *ngIf="dataService.loaded">
+    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M10.146 7.646a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L12.793 11l-2.647-2.646a.5.5 0 0 1 0-.708z"/>
+        <path fill-rule="evenodd" d="M2 11a.5.5 0 0 1 .5-.5H13a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 11zm3.854-9.354a.5.5 0 0 1 0 .708L3.207 5l2.647 2.646a.5.5 0 1 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 0 1 .708 0z"/>
+        <path fill-rule="evenodd" d="M2.5 5a.5.5 0 0 1 .5-.5h10.5a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+      </svg>
+    synchronized
+</div>
+
+<button (click)="openAddNewBlock = true" class="btn btn-primary">Add new</button>
+
+<div class="row contaner">
+    <div class="col-lg-4" *ngFor="let book of listOfBooks">
+        <book [thisBook]="book"></book>
+    </div>
+</div>
+
+
+<div *ngIf="openAddNewBlock" class="newBook">
+    <h1>Add new book</h1>
+    <form #bookForm="ngForm" (ngSubmit)="addBook(bookForm)">
+        <div class="form-group">
+            <label>Name</label>
+            <input class="form-control" name="name" ngModel #name="ngModel" required />
+            <div [hidden]="!bookForm.submitted || name.valid" class="alert alert-danger">
+                Name is required
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Pages</label>
+            <input class="form-control" type="number" name="pages" ngModel #pages="ngModel" required />
+            <div [hidden]="!bookForm.submitted || pages.valid" class="alert alert-danger">
+                Amount of pages is required
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Price</label>
+            <input class="form-control" type="number" name="price" ngModel #price="ngModel" required />
+            <div [hidden]="!bookForm.submitted || price.valid" class="alert alert-danger">
+                Price is required
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Type</label>
+            <select class="form-control" name="type" ngModel #type="ngModel" required>
+                <option *ngFor="let type of keys" [ngValue]="type">
+                    {{type}}
+                </option>
+            </select>
+            <div [hidden]="!bookForm.submitted || type.valid" class="alert alert-danger">
+                Book type is required
+            </div>
+        </div>
+        <div class="form-group buttons">
+            <button type="submit" class="btn btn-primary">Add new book</button>
+            <button type="button" class="btn btn-warning" (click)="openAddNewBlock = false">Cancel</button>
+        </div>
+    </form>
+</div>
